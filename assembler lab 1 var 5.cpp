@@ -9,7 +9,7 @@ int main()
 {
 
 	char b1 = 100, b2 = 5, b3 = 3, b4 = 4; //1
-	short int w1 = 20000, w2 = 10000, w3 = 6;//2
+	short int w1 = 20, w2 = 100, w3 = 6;//2
 	int d1 = 10;//4
 	int res = 0;
 	int p = (b1 * (w1 - b2) - w2 * b3) / w3 + d1 / b4;
