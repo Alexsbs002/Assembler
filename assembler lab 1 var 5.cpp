@@ -9,10 +9,10 @@ int main()
 {
 
 	char b1 = 100, b2 = 5, b3 = 3, b4 = 4; //1
-	short int w1 = 20, w2 = 100, w3 = 6;//2
+	short int w1 = 20, w2 = 10, w3 = 6;//2
 	int d1 = 10;//4
 	int res = 0;
-	int p = (b1 * (w1 - b2) - w2 * b3) / w3 + d1 / b4;
+	int p = (((b1 * (w1 - b2) - w2 * b3) / w3) + (d1 / b4));
 	_asm {
 		; 1 = (w1 - b2) = bx
 		mov al, b2
@@ -30,34 +30,34 @@ int main()
 		; 3 = w2 * b3 = (dx:ax)
 		mov al, b3
 		cbw
-		mul w2
+		imul w2
 
 		; 4 = 2 - 3 = (cx:bx)
 		sub bx, ax
 		sbb cx, dx
 
-		; 5 = 4 / w3 = (cx, bx)
+		; 5 = 4 / w3 = bx
 		mov dx, cx
 		mov ax, bx
+		
 		idiv w3
 		mov bx, ax
-		mov cx, dx
 
-		; 6 = d1 / b4 = (ax, dx)
 
+		; 6 = d1 / b4 = ax
+		mov al, b4
+		cbw
+		mov cx, ax
 		mov ax, word ptr d1
 		mov dx, word ptr d1 + 2
-		idiv b4
+		idiv cx
 
 		; 7 = 5 + 6
 
-		add cx, ax
-		adc bx, dx
+		add bx, ax
 
+		mov word ptr res, bx
 
-
-		mov word ptr res, cx
-		mov word ptr res + 2, bx
 	}
 	cout << p << "\n";
 	cout << res << "\n";
