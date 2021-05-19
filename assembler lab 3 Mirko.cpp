@@ -126,3 +126,26 @@ int main()
 	system("pause");
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+ checkB:
+		cmp b, 0
+			 jne checkm1
+			 je checkm2
+
+			 checkm1:
+		 cmp c, 0
+			 jge m3
+			 jl m1
+
+			 checkm2:
+		 cmp c, 0
+			 jle m3
+			 jg m2
